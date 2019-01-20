@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import SelectShelf from './SelectShelf.js'
+import SelectShelf from './SelectShelf.js';
 import PropTypes from 'prop-types';
 
 class Book extends Component {

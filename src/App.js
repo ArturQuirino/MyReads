@@ -1,22 +1,29 @@
 import React from 'react'
-import * as BooksAPI from './BooksAPI'
 import { Route, Link } from 'react-router-dom';
 import './App.css';
-import SelectShelf from './SelectShelf.js';
-import Book from './Book.js'
+import Shelf from './Shelf';
+
 
 class BooksApp extends React.Component {
 
   state = {
-    books: []
+    shelves: [
+      {
+        name: "Currently Reading",
+        value: "currentlyReading"
+      },
+      {
+        name: "Want to Read",
+        value: "wantToRead"
+      },
+      {
+        name: "Read",
+        value: "read"
+      },
+    ]
   }
 
-  componentDidMount() {
-    BooksAPI.getAll().then((books) => {
-      console.log(books);
-      this.setState({books})
-    })
-  }
+  
 
 
 
@@ -54,42 +61,9 @@ class BooksApp extends React.Component {
                 </div>
                 <div className="list-books-content">
                   <div>
-                    <div className="bookshelf">
-                      <h2 className="bookshelf-title">Currently Reading</h2>
-                      <div className="bookshelf-books">
-                        <ol className="books-grid">
-                        { this.state.books.map(book => (
-                          book.shelf === "currentlyReading" && (
-                          <Book book={book} />
-                          )
-                        ))}
-                        </ol>
-                      </div>
-                    </div>
-                    <div className="bookshelf">
-                      <h2 className="bookshelf-title">Want to Read</h2>
-                      <div className="bookshelf-books">
-                        <ol className="books-grid">
-                        { this.state.books.map(book => (
-                          book.shelf === "wantToRead" && (
-                          <Book book={book} />
-                          )
-                        ))}
-                        </ol>
-                      </div>
-                    </div>
-                    <div className="bookshelf">
-                      <h2 className="bookshelf-title">Read</h2>
-                      <div className="bookshelf-books">
-                        <ol className="books-grid">
-                        { this.state.books.map(book => (
-                          book.shelf === "read" && (
-                          <Book book={book} />
-                          )
-                        ))}
-                        </ol>
-                      </div>
-                    </div>
+                    {this.state.shelves.map((shelf) => (
+                      <Shelf shelf={shelf} key={shelf.value}></Shelf>
+                    ))}
                   </div>
                 </div>
                 <Link className="open-search" to="/search">Search a book</Link>
