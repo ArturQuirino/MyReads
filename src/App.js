@@ -3,11 +3,13 @@ import { Route, Link } from 'react-router-dom';
 import './App.css';
 import Shelf from './Shelf';
 import SearchBooks from './SearchBooks.js';
+import * as BooksAPI from './BooksAPI'
 
 
 class BooksApp extends React.Component {
 
   state = {
+    books:[],
     shelves: [
       {
         name: "Currently Reading",
@@ -23,6 +25,23 @@ class BooksApp extends React.Component {
       },
     ]
   }
+
+  componentDidMount() {
+    BooksAPI.getAll().then((books) => {
+        this.setState({books})
+    })
+}
+
+  changeShelf = (book, shelf) => {
+    debugger;
+    if(shelf && shelf !== 'move') {
+        book.shelf = shelf;
+        this.setState(state => ({
+            books: state.books.filter(b => b.id !== book.id).concat([book])
+        }))
+        BooksAPI.update(book, shelf);
+    }
+}
 
   render() {
     return (
@@ -40,7 +59,7 @@ class BooksApp extends React.Component {
                 <div className="list-books-content">
                   <div>
                     {this.state.shelves.map((shelf) => (
-                      <Shelf shelf={shelf} key={shelf.value}></Shelf>
+                      <Shelf shelf={shelf} key={shelf.value} books={this.state.books} onChangeShelf={this.changeShelf}></Shelf>
                     ))}
                   </div>
                 </div>
