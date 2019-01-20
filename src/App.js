@@ -2,7 +2,8 @@ import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import { Route, Link } from 'react-router-dom';
 import './App.css';
-import SelectShelf from './SelectShelf.js'
+import SelectShelf from './SelectShelf.js';
+import Book from './Book.js'
 
 class BooksApp extends React.Component {
 
@@ -59,16 +60,7 @@ class BooksApp extends React.Component {
                         <ol className="books-grid">
                         { this.state.books.map(book => (
                           book.shelf === "currentlyReading" && (
-                          <li>
-                            <div className="book">
-                              <div className="book-top">
-                                <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`}}></div>
-                                <SelectShelf />
-                              </div>
-                              <div className="book-title">{book.title}</div>
-                              <div className="book-authors">{book.authors[0]}</div>
-                            </div>
-                          </li>
+                          <Book book={book} />
                           )
                         ))}
                         </ol>
@@ -80,16 +72,7 @@ class BooksApp extends React.Component {
                         <ol className="books-grid">
                         { this.state.books.map(book => (
                           book.shelf === "wantToRead" && (
-                          <li>
-                            <div className="book">
-                              <div className="book-top">
-                                <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`}}></div>
-                                <SelectShelf />
-                              </div>
-                              <div className="book-title">{book.title}</div>
-                              <div className="book-authors">{book.authors[0]}</div>
-                            </div>
-                          </li>
+                          <Book book={book} />
                           )
                         ))}
                         </ol>
@@ -101,16 +84,7 @@ class BooksApp extends React.Component {
                         <ol className="books-grid">
                         { this.state.books.map(book => (
                           book.shelf === "read" && (
-                          <li>
-                            <div className="book">
-                              <div className="book-top">
-                                <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`}}></div>
-                                <SelectShelf />
-                              </div>
-                              <div className="book-title">{book.title}</div>
-                              <div className="book-authors">{book.authors[0]}</div>
-                            </div>
-                          </li>
+                          <Book book={book} />
                           )
                         ))}
                         </ol>
