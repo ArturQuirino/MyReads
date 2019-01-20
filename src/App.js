@@ -1,8 +1,8 @@
 import React from 'react'
-// import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from './BooksAPI'
 import { Route, Link } from 'react-router-dom';
 import './App.css';
-import * as BooksAPI from './BooksAPI.js';
+import SelectShelf from './SelectShelf.js'
 
 class BooksApp extends React.Component {
 
@@ -63,15 +63,7 @@ class BooksApp extends React.Component {
                             <div className="book">
                               <div className="book-top">
                                 <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`}}></div>
-                                <div className="book-shelf-changer">
-                                    <select>
-                                      <option value="move" disabled>Move to...</option>
-                                      <option value="currentlyReading">Currently Reading</option>
-                                      <option value="wantToRead">Want to Read</option>
-                                      <option value="read">Read</option>
-                                      <option value="none">None</option>
-                                    </select>
-                                  </div>
+                                <SelectShelf />
                               </div>
                               <div className="book-title">{book.title}</div>
                               <div className="book-authors">{book.authors[0]}</div>
@@ -92,15 +84,7 @@ class BooksApp extends React.Component {
                             <div className="book">
                               <div className="book-top">
                                 <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`}}></div>
-                                <div className="book-shelf-changer">
-                                    <select>
-                                      <option value="move" disabled>Move to...</option>
-                                      <option value="currentlyReading">Currently Reading</option>
-                                      <option value="wantToRead">Want to Read</option>
-                                      <option value="read">Read</option>
-                                      <option value="none">None</option>
-                                    </select>
-                                  </div>
+                                <SelectShelf />
                               </div>
                               <div className="book-title">{book.title}</div>
                               <div className="book-authors">{book.authors[0]}</div>
@@ -121,15 +105,7 @@ class BooksApp extends React.Component {
                             <div className="book">
                               <div className="book-top">
                                 <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`}}></div>
-                                <div className="book-shelf-changer">
-                                    <select>
-                                      <option value="move" disabled>Move to...</option>
-                                      <option value="currentlyReading">Currently Reading</option>
-                                      <option value="wantToRead">Want to Read</option>
-                                      <option value="read">Read</option>
-                                      <option value="none">None</option>
-                                    </select>
-                                  </div>
+                                <SelectShelf />
                               </div>
                               <div className="book-title">{book.title}</div>
                               <div className="book-authors">{book.authors[0]}</div>
@@ -142,7 +118,7 @@ class BooksApp extends React.Component {
                     </div>
                   </div>
                 </div>
-                <Link className="open-search" to="/search">Add a book</Link>
+                <Link className="open-search" to="/search">Search a book</Link>
               </div>
             )}/>
           </div>
