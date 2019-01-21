@@ -3,7 +3,7 @@ import { Route, Link } from 'react-router-dom';
 import './App.css';
 import Shelf from './Shelf';
 import SearchBooks from './SearchBooks.js';
-import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from './BooksAPI';
 
 
 class BooksApp extends React.Component {
@@ -33,7 +33,6 @@ class BooksApp extends React.Component {
 }
 
   changeShelf = (book, shelf) => {
-    debugger;
     if(shelf && shelf !== 'move') {
         book.shelf = shelf;
         this.setState(state => ({
@@ -48,7 +47,7 @@ class BooksApp extends React.Component {
       
         <div className="app">
           <Route path="/search" render={() => (
-            <SearchBooks/>
+            <SearchBooks onChangeShelf={this.changeShelf}/>
           )}/>
           
           <Route exact path="/" render={() => (
