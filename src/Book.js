@@ -10,22 +10,27 @@ class Book extends Component {
 
     render() {
         const { book, onChangeShelf } = this.props;
-        return (
-            <li>
-                <div className="book">
-                    <div className="book-top">
-                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`}}></div>
-                    <SelectShelf book={book} onChangeShelf={onChangeShelf}/>
+        debugger;
+        if(book && book.imageLinks && book.imageLinks.smallThumbnail && book.title){
+            return (
+                <li>
+                    <div className="book">
+                        <div className="book-top">
+                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`}}></div>
+                        <SelectShelf book={book} onChangeShelf={onChangeShelf}/>
+                        </div>
+                        <div className="book-title">{book.title}</div>
+                        {
+                            book.authors && (
+                                <div className="book-authors">{book.authors[0]}</div>
+                            )
+                        }
                     </div>
-                    <div className="book-title">{book.title}</div>
-                    {
-                        book.authors && (
-                            <div className="book-authors">{book.authors[0]}</div>
-                        )
-                    }
-                </div>
-            </li>
-        )
+                </li>
+            )
+         } else {
+             return null;
+         }
     }
 }
 
