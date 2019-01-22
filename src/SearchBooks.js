@@ -7,12 +7,12 @@ import PropTypes from 'prop-types';
 class SearchBooks extends Component {
     constructor(props) {
         super(props);
-
         this.queryBooks = this.queryBooks.bind(this);
     }
 
     static propTypes = {
-        onChangeShelf: PropTypes.func.isRequired
+        onChangeShelf: PropTypes.func.isRequired,
+        booksOnTheShelves: PropTypes.array.isRequired
     }
 
     state = {
@@ -22,6 +22,9 @@ class SearchBooks extends Component {
     queryBooks(event) {
         BooksAPI.search(event.target.value).then((searchedBooks) => {
             if(searchedBooks && !searchedBooks.error){
+                const idBooksShelves = this.props.booksOnTheShelves.map(bs => bs.id);
+                console.log(idBooksShelves.length);
+                searchedBooks = searchedBooks.filter(b => !idBooksShelves.includes(b.id));
                 this.setState({
                     books: searchedBooks
                 });
@@ -30,7 +33,7 @@ class SearchBooks extends Component {
                     books: []
                 });
             }
-        })
+        });
     }
 
     render () {

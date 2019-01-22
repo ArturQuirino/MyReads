@@ -10,7 +10,6 @@ class Book extends Component {
 
     render() {
         const { book, onChangeShelf } = this.props;
-        debugger;
         if(book && book.imageLinks && book.imageLinks.smallThumbnail && book.title){
             return (
                 <li>
