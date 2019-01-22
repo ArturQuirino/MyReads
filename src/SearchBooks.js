@@ -19,12 +19,40 @@ class SearchBooks extends Component {
         books: []
     }
 
+    shelves = [
+        {
+          name: "Currently Reading",
+          value: "currentlyReading"
+        },
+        {
+          name: "Want to Read",
+          value: "wantToRead"
+        },
+        {
+          name: "Read",
+          value: "read"
+        },
+        {
+            name: "None",
+            value: "none"
+        },
+      ]
+
     queryBooks(event) {
         BooksAPI.search(event.target.value).then((searchedBooks) => {
             if(searchedBooks && !searchedBooks.error){
-                const idBooksShelves = this.props.booksOnTheShelves.map(bs => bs.id);
-                console.log(idBooksShelves.length);
-                searchedBooks = searchedBooks.filter(b => !idBooksShelves.includes(b.id));
+                const booksHomePage = this.props.booksOnTheShelves
+                const idBooksShelves = booksHomePage.map(bs => bs.id);
+
+                searchedBooks = searchedBooks.map((b) => {
+                    if(!idBooksShelves.includes(b.id)){
+                        b.shelf = "none";
+                    }
+                    else {
+                        b.shelf = booksHomePage.filter(bh => bh.id === b.id)[0].shelf;
+                    }
+                    return b;
+                })
                 this.setState({
                     books: searchedBooks
                 });
@@ -48,20 +76,11 @@ class SearchBooks extends Component {
                 </div>
               </div>
               <div className="search-books-results">
-                <ol className="books-grid">
-                {
-                    this.state.books.length > 0 && (
-                    <Shelf shelf={{
-                                name: "None",
-                                value: "none"
-                                }} 
-                        key={"none"}
-                        books={this.state.books}
-                        onChangeShelf={onChangeShelf}/>
-                    )
+              {
+                  this.shelves.map((shelf) => (
+                    <Shelf shelf={shelf} key={shelf.value} books={this.state.books} onChangeShelf={onChangeShelf}></Shelf>
+                    ))
                 }
-                
-                </ol>
               </div>
             </div>
         )

@@ -65,7 +65,7 @@ class BooksApp extends React.Component {
                 <div className="list-books-content">
                   <div>
                     {this.state.shelves.map((shelf) => (
-                      <Shelf shelf={shelf} key={shelf.value} books={this.state.books} onChangeShelf={this.changeShelf}></Shelf>
+                       <Shelf shelf={shelf} key={shelf.value} books={this.state.books} onChangeShelf={this.changeShelf}></Shelf>
                     ))}
                   </div>
                 </div>

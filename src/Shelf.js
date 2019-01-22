@@ -12,7 +12,8 @@ class Shelf extends Component {
 
     render() {
         const { shelf, books, onChangeShelf } = this.props;
-        if(books){
+        debugger;
+        if(books && books.filter(b => b.shelf === shelf.value).length > 0){
             
             return (
                 <div className="bookshelf">
@@ -29,6 +30,8 @@ class Shelf extends Component {
                     </div>
                 </div>
             )
+        } else {
+            return null;
         }
         
 
